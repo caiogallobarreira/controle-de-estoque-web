@@ -5,17 +5,8 @@ import Image from 'next/image'
 
 async function getProdutos() {
   const url = 'http://localhost:8080/api/v1/produto';
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('Failed to fetch data');
-    }
-    console.log(response);
-    return response.json();
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    return [];
-  }
+  const response = await fetch(url);
+  return response.json();
 }
 
 
