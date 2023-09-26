@@ -1,13 +1,8 @@
 import Navbar from '@/components/Navbar'
 import PageTitle from '@/components/PageTitle'
-import ProductCard from '@/components/ProductCard'
-import Image from 'next/image'
-import { getProdutos } from '@/actions/produto'
 import Button from '@/components/Button'
 
 export default async function Home() {
-  let produtos = await getProdutos();
-  produtos = produtos._embedded.entityModelList;
   return (
     <>
       <Navbar />

@@ -70,7 +70,7 @@ export default function Home() {
 
 
           <div className="flex justify-around">
-              <Button href="/contas" variant="secondary">
+              <Button href="/produto" variant="secondary">
                   <ChevronLeftIcon className="h-6 w-6 " />
                   cancelar
               </Button>

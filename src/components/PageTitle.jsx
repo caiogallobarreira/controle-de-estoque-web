@@ -1,3 +1,4 @@
+"use client"
 export default function PageTitle({ title }) {
     return (
         <div className="flex flex-col rounded-md bg-slate-200">
