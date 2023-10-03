@@ -14,7 +14,7 @@ export default async function Home() {
         <PageTitle title="Dashboard" />
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores, nihil. Quasi aperiam dolore ab repellendus porro soluta quisquam. Assumenda quas a tempore provident enim illum numquam amet, quibusdam culpa fugiat?</p>
         <div className='grid grid-cols-3 w-auto self-center gap-4 my-10'>
-          {produtos.map(produto => <ProductCard key={produto.id} produto={produto}></ProductCard>) }
+          {produtos?.map(produto => <ProductCard key={produto.id} produto={produto}></ProductCard>) }
         </div>
       </div>
     </>

@@ -1,10 +1,12 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
+import { cookies } from "next/headers"
 
 const url = process.env.NEXT_PUBLIC_BASE_URL + "/produto"
 
 export async function create(formData) {
+    const token = cookies().get('token')
 
     const obj = Object.fromEntries(formData);
 
@@ -15,7 +17,8 @@ export async function create(formData) {
         method: "POST",
         body: JSON.stringify(obj),
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token.value}`
         }
     }
 
@@ -33,17 +36,29 @@ export async function create(formData) {
 }
 
 export async function getProdutos() {
-    const resp = await fetch(url+"?size=5000")
-    console.log(resp);
+    const token = cookies().get('token')
+
+    const options = {
+        headers: {
+            "Authorization": `Bearer ${token.value}`
+        }
+    }
+
+    const resp = await fetch(url, options)
+
+    if (resp.status !== 200) 
+        console.log(resp)
     return resp.json()
 }
 
 export async function destroy(id){
+    const token = cookies().get('token')
 
     const urlDelete = url + "/" + id
 
     const options = {
-        method: "DELETE"
+        method: "DELETE",
+        "Authorization": `Bearer ${token.value}`
     }
 
     const resp = await fetch(urlDelete, options)
@@ -56,11 +71,18 @@ export async function destroy(id){
 }
 
 export async function getProduto(id){
+    const token = cookies().get('token')
     const getUrl = url + "/" + id
 
     console.log(getUrl);
 
-    const resp = await fetch(getUrl)
+    const options = {
+        headers: {
+            "Authorization": `Bearer ${token.value}`
+        }
+    }
+
+    const resp = await fetch(getUrl, options)
 
     if(resp.status !== 200)
         return {error: "Erro ao buscar dados do produto"}
@@ -69,13 +91,15 @@ export async function getProduto(id){
 }
 
 export async function update(conta){
+    const token = cookies().get('token')
     const updateUrl = url + "/" + conta.id
 
     const options = {
         method: "PUT",
         body: JSON.stringify( conta ),
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token.value}`
         }
     }
 
